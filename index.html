@@ -33,7 +33,7 @@
         }
         
         .section.presentations h2 {
-            color: #1E293B;
+            color: #ffffff;
         }
 
         .section.skills {
@@ -52,8 +52,8 @@
         }
 
         .section.presentations {
-            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
-            color: #0F172A;
+            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            color: #ffffff;
         }
 
         .section.reading {
@@ -77,7 +77,8 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
@@ -200,7 +201,10 @@
             cursor: pointer;
             transition: all 0.3s ease;
             text-decoration: none;
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
         }
 
         .btn-primary {
@@ -231,9 +235,10 @@
             animation: float 6s ease-in-out infinite;
             pointer-events: none;
             z-index: -1;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.25);
+            backdrop-filter: blur(15px);
             backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
         /* Floating element size variations */
@@ -265,7 +270,8 @@
         }
 
         .section:nth-child(even) {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
         }
 
         .section h2 {
@@ -290,7 +296,8 @@
         .industry-expertise {
             margin-top: 2rem;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             border-radius: 15px;
         }
 
@@ -312,7 +319,8 @@
             flex-direction: column;
             align-items: center;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
@@ -337,7 +345,8 @@
         }
 
         .presentation-card {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             padding: 2rem;
             border-radius: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -373,7 +382,8 @@
         }
 
         .topic-tag {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.9rem;
@@ -385,7 +395,8 @@
         }
 
         .philosophy-quotes blockquote {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             padding: 1rem;
             border-left: 4px solid rgba(255, 255, 255, 0.3);
             margin: 1rem 0;
@@ -419,7 +430,8 @@
         }
 
         .skill-card {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
@@ -449,7 +461,8 @@
             top: 0;
             bottom: 0;
             width: 2px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             transform: translateX(-50%);
         }
 
@@ -459,7 +472,8 @@
         }
 
         .timeline-content {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             padding: 2rem;
             border-radius: 15px;
             width: 45%;
@@ -498,7 +512,8 @@
             padding: 1rem;
             border: none;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             color: #ffffff;
             font-size: 1rem;
         }
@@ -574,18 +589,41 @@
             transform: translateX(-50%);
             color: #ffffff;
             text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-indicator:hover {
+            transform: translateX(-50%) translateY(-5px);
+            color: #F59E0B;
+        }
+
+        .scroll-text {
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+            opacity: 0.8;
+            font-weight: 300;
         }
 
         .scroll-arrow {
-            width: 30px;
-            height: 30px;
-            border: 2px solid #ffffff;
+            width: 40px;
+            height: 40px;
+            border: 2px solid rgba(255, 255, 255, 0.6);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             margin: 0 auto;
-            animation: bounce 2s infinite;
+            font-size: 1.5rem;
+            animation: bounce 2s infinite, pulse 3s infinite;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .scroll-indicator:hover .scroll-arrow {
+            border-color: #F59E0B;
+            background: rgba(245, 158, 11, 0.2);
         }
 
         @keyframes bounce {
@@ -618,7 +656,8 @@
         }
 
         .article-card {
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             border-radius: 20px;
             padding: 2rem;
             transition: all 0.3s ease;
@@ -632,7 +671,8 @@
         .article-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 20px 40px rgba(0,0,0,0.2);
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             border-color: rgba(255, 255, 255, 0.3);
         }
 
@@ -669,7 +709,8 @@
         }
 
         .article-category {
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             padding: 0.3rem 0.8rem;
             border-radius: 20px;
             font-size: 0.8rem;
@@ -706,7 +747,8 @@
             font-size: 1.1rem;
             color: rgba(255, 255, 255, 0.8);
             padding: 3rem;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             border-radius: 15px;
         }
 
@@ -738,7 +780,8 @@
             padding: 1rem 3rem 1rem 1rem;
             border: none;
             border-radius: 50px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             color: #ffffff;
             font-size: 1rem;
             backdrop-filter: blur(10px);
@@ -748,7 +791,8 @@
 
         .search-input:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             border-color: rgba(255, 255, 255, 0.4);
         }
 
@@ -784,23 +828,45 @@
 
         .category-select,
         .status-select {
-            flex: 1;
-            min-width: 200px;
-            padding: 0.75rem 1rem;
+            width: 100%;
+            padding: 0.75rem 3rem 0.75rem 1rem;
             border: none;
             border-radius: 25px;
-            background: rgba(255, 255, 255, 0.3);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             color: #ffffff;
             font-size: 0.9rem;
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.2);
             cursor: pointer;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            position: relative;
+        }
+
+        .select-wrapper {
+            position: relative;
+            width: 100%;
+        }
+
+        .select-wrapper::after {
+            content: 'expand_more';
+            font-family: 'Material Icons';
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            font-size: 1.2rem;
         }
 
         .category-select:focus,
         .status-select:focus {
             outline: none;
-            background: rgba(255, 255, 255, 0.35);
+            background: rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(15px);
             border-color: rgba(255, 255, 255, 0.4);
         }
 
@@ -831,6 +897,10 @@
             .category-select,
             .status-select {
                 min-width: unset;
+            }
+            
+            .select-wrapper {
+                width: 100%;
             }
 
             .results-info {
@@ -891,9 +961,9 @@
         <div class="floating-element medium" style="bottom: 40%; right: 5%; animation-delay: 0.5s;"></div>
         
         <!-- Scroll Indicator -->
-        <div class="scroll-indicator">
-            <p>Scroll Down</p>
-            <div class="scroll-arrow">↓</div>
+        <div class="scroll-indicator" onclick="document.getElementById('about').scrollIntoView({behavior: 'smooth'})">
+            <p class="scroll-text">Explore More</p>
+            <div class="scroll-arrow"><i class="material-icons">keyboard_arrow_down</i></div>
         </div>
     </section>
 
@@ -1105,9 +1175,11 @@
                     <button id="clear-search" class="clear-search">✕</button>
                 </div>
                 <div class="filter-container">
-                    <select id="category-filter" class="category-select">
-                        <option value="">All Categories</option>
-                    </select>
+                    <div class="select-wrapper">
+                        <select id="category-filter" class="category-select">
+                            <option value="">All Categories</option>
+                        </select>
+                    </div>
                 </div>
             </div>
             

@@ -2,14 +2,14 @@
   publish = "."
   
 [[redirects]]
-  from = "http://adamhafez.dev/*"
-  to = "https://adamhafez.dev/:splat"
+  from = "http://adamhafez.co/*"
+  to = "https://adamhafez.co/:splat"
   status = 301
   force = true
 
 [[redirects]]
-  from = "https://www.adamhafez.dev/*"
-  to = "https://adamhafez.dev/:splat"
+  from = "https://www.adamhafez.co/*"
+  to = "https://adamhafez.co/:splat"
   status = 301
   force = true
 

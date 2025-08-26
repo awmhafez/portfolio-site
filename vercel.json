@@ -1,8 +1,8 @@
 {
   "redirects": [
     {
-      "source": "http://adamhafez.dev/(.*)",
-      "destination": "https://adamhafez.dev/$1",
+      "source": "http://adamhafez.co/(.*)",
+      "destination": "https://adamhafez.co/$1",
       "permanent": true
     }
   ],

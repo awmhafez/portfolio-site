@@ -6,6 +6,7 @@
     <title>Adam Hafez - Portfolio</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -14,7 +15,7 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: #ffffff;
             background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
@@ -52,7 +53,7 @@
         }
 
         .section.presentations {
-            background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+            background: linear-gradient(135deg, #92400E 0%, #78350F 100%);
             color: #ffffff;
         }
 
@@ -86,8 +87,9 @@
         }
 
         nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            color: #333;
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(20px);
+            color: #F8FAFC;
         }
 
         .nav-container {
@@ -114,11 +116,28 @@
         .nav-links a {
             color: inherit;
             text-decoration: none;
-            transition: opacity 0.3s ease;
+            transition: all 0.3s ease;
+            padding: 0.5rem 1rem;
+            border-radius: 25px;
+            position: relative;
         }
 
         .nav-links a:hover {
             opacity: 0.7;
+            background: rgba(255, 255, 255, 0.1);
+        }
+        
+        .nav-links a.active {
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            opacity: 1;
+        }
+        
+        nav.scrolled .nav-links a.active {
+            background: rgba(79, 70, 229, 0.3);
+            border-color: rgba(79, 70, 229, 0.5);
+            color: #A5B4FC;
         }
 
         /* Hero Section */
@@ -443,8 +462,12 @@
         }
 
         .skill-icon {
-            font-size: 3rem;
+            font-size: 4rem !important;
             margin-bottom: 1rem;
+        }
+        
+        .skill-icon .material-icons {
+            font-size: inherit !important;
         }
 
         /* Experience Section */
@@ -912,6 +935,36 @@
     </style>
 </head>
 <body>
+    <script>
+        // Function to update active navigation item
+        function updateActiveNav() {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-links a');
+            
+            let currentSection = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    currentSection = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === '#' + currentSection) {
+                    link.classList.add('active');
+                }
+            });
+        }
+        
+        // Update on scroll
+        window.addEventListener('scroll', updateActiveNav);
+        
+        // Update on page load
+        document.addEventListener('DOMContentLoaded', updateActiveNav);
+    </script>
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">

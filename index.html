@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adam Hafez - Portfolio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #ffffff;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1rem 0;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(255, 255, 255, 0.95);
+            color: #333;
+        }
+
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: inherit;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: inherit;
+            text-decoration: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            opacity: 0.7;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 2;
+            max-width: 600px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            line-height: 1.7;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 1s ease 0.6s forwards;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: #ffffff;
+            color: #667eea;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: #ffffff;
+            border: 2px solid #ffffff;
+        }
+
+        .btn-secondary:hover {
+            background: #ffffff;
+            color: #667eea;
+        }
+
+        /* Floating Elements */
+        .floating-element {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .floating-element:nth-child(1) {
+            width: 80px;
+            height: 80px;
+            top: 20%;
+            right: 10%;
+            animation-delay: 0s;
+        }
+
+        .floating-element:nth-child(2) {
+            width: 60px;
+            height: 60px;
+            top: 60%;
+            right: 20%;
+            animation-delay: 2s;
+        }
+
+        .floating-element:nth-child(3) {
+            width: 40px;
+            height: 40px;
+            bottom: 20%;
+            right: 15%;
+            animation-delay: 4s;
+        }
+
+        /* Sections */
+        .section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .section:nth-child(even) {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .section h2 {
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #ffffff;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .about-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            margin: 0 auto;
+        }
+
+        .about-text {
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        /* Industry Expertise */
+        .industry-expertise {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 15px;
+        }
+
+        .industry-expertise h3 {
+            color: #ffffff;
+            margin-bottom: 1.5rem;
+            font-size: 1.3rem;
+        }
+
+        .expertise-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .expertise-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1rem;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .expertise-item:hover {
+            transform: translateY(-3px);
+        }
+
+        .expertise-icon {
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Presentations Section */
+        .presentation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .presentation-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .presentation-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+
+        .presentation-header h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+        }
+
+        .presentation-header h4 {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 1.5rem;
+        }
+
+        .presentation-content p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .presentation-topics {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .topic-tag {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #ffffff;
+        }
+
+        .philosophy-quotes {
+            margin: 1rem 0;
+        }
+
+        .philosophy-quotes blockquote {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-left: 4px solid rgba(255, 255, 255, 0.3);
+            margin: 1rem 0;
+            font-style: italic;
+            border-radius: 5px;
+        }
+
+        .presentation-details ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .presentation-details ul li {
+            padding: 0.3rem 0;
+            position: relative;
+            padding-left: 1.5rem;
+        }
+
+        .presentation-details ul li::before {
+            content: '▸';
+            position: absolute;
+            left: 0;
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .skill-card {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .skill-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .skill-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Experience Section */
+        .timeline {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateX(-50%);
+        }
+
+        .timeline-item {
+            margin: 2rem 0;
+            position: relative;
+        }
+
+        .timeline-content {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            width: 45%;
+            position: relative;
+        }
+
+        .timeline-item:nth-child(odd) .timeline-content {
+            margin-left: auto;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: 50%;
+            top: 2rem;
+            width: 20px;
+            height: 20px;
+            background: #ffffff;
+            border-radius: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Contact Section */
+        .contact-form {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: none;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #ffffff;
+            font-size: 1rem;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+
+            .timeline::before {
+                left: 20px;
+            }
+
+            .timeline-content {
+                width: calc(100% - 60px);
+                margin-left: 60px !important;
+            }
+
+            .timeline-item::before {
+                left: 20px;
+                transform: translateX(-50%);
+            }
+
+            .nav-links {
+                display: none;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes float {
+            0%, 100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 2rem;
+            left: 50%;
+            transform: translateX(-50%);
+            color: #ffffff;
+            text-align: center;
+        }
+
+        .scroll-arrow {
+            width: 30px;
+            height: 30px;
+            border: 2px solid #ffffff;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Adam Hafez</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#presentations">Presentations</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Adam Hafez</h1>
+                <p class="subtitle">Project Technical Director - Tools & Pipelines</p>
+                <p class="description">
+                    Technical Director with 8+ years experience in AAA gaming, leading tool and pipeline initiatives 
+                    for live service MMO development. Expert in building scalable content pipelines, asset management 
+                    systems, and fostering cross-functional collaboration in remote development environments.
+                </p>
+                <div class="cta-buttons">
+                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                    <a href="#about" class="btn btn-secondary">Learn More</a>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        <div class="floating-element"></div>
+        
+        <!-- Scroll Indicator -->
+        <div class="scroll-indicator">
+            <p>Scroll Down</p>
+            <div class="scroll-arrow">↓</div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2>About Me</h2>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="profile.jpeg" alt="Adam Hafez" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
+                </div>
+                <div class="about-text">
+                    <p>
+                        I'm a Technical Director with over 8 years of experience in AAA gaming, currently 
+                        leading a remote 20+ person team of engineers at ZeniMax Online Studios. My journey 
+                        started as a Software Engineer in healthcare IT and evolved into specializing in 
+                        production pipelines and tooling for Live Service MMO game development.
+                    </p>
+                    <br>
+                    <p>
+                        I focus on building game tools as a service - creating systems that empower diverse teams 
+                        including animators, designers, artists, and engineers to efficiently develop content for 
+                        live service games. My expertise spans asset management systems, cross-team collaboration, 
+                        and solving the unique challenges of 24-hour development cycles across global time zones.
+                    </p>
+                    <br>
+                    <div class="industry-expertise">
+                        <h3>Industry Expertise</h3>
+                        <div class="expertise-grid">
+                            <div class="expertise-item">
+                                <span class="expertise-icon">🎨</span>
+                                <span>Artists</span>
+                            </div>
+                            <div class="expertise-item">
+                                <span class="expertise-icon">🎮</span>
+                                <span>Designers</span>
+                            </div>
+                            <div class="expertise-item">
+                                <span class="expertise-icon">⚙️</span>
+                                <span>Engineers</span>
+                            </div>
+                            <div class="expertise-item">
+                                <span class="expertise-icon">🎬</span>
+                                <span>Animators</span>
+                            </div>
+                            <div class="expertise-item">
+                                <span class="expertise-icon">🔧</span>
+                                <span>Technical Artists</span>
+                            </div>
+                            <div class="expertise-item">
+                                <span class="expertise-icon">📋</span>
+                                <span>Producers</span>
+                            </div>
+                        </div>
+                        <p style="margin-top: 1rem; font-style: italic; color: rgba(255, 255, 255, 0.8);">
+                            "People are not systems and are usually happier if they get to do their actual job"
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2>Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="skill-card">
+                    <div class="skill-icon">🛠️</div>
+                    <h3>Game Tools as a Service</h3>
+                    <p>Asset management systems, content pipelines, developer productivity tools, iteration speed optimization</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">👥</div>
+                    <h3>Remote Team Leadership</h3>
+                    <p>Managing 20+ distributed engineers, cross-timezone collaboration, autonomous team enablement</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🎮</div>
+                    <h3>Live Service Development</h3>
+                    <p>MMO pipelines, continuous content delivery, release management, micro-release cycle optimization</p>
+                </div>
+                <div class="skill-card">
+                    <div class="skill-icon">🔄</div>
+                    <h3>Technical Vision & Strategy</h3>
+                    <p>Technical roadmapping, stakeholder collaboration, future-proofing development processes</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Experience Section -->
+    <section id="experience" class="section">
+        <div class="container">
+            <h2>Professional Experience</h2>
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Project Technical Director - Tools & Pipelines</h3>
+                        <h4>ZeniMax Online Studios (Feb 2021 - Present)</h4>
+                        <p>
+                            Leading technical foundation with focus on developer tools, pipelines, and release management. 
+                            Growing and managing a remote 20+ person team across multiple time zones. Balancing long-term 
+                            project requirements with immediate developer needs while establishing cross-functional communication processes.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Lead Technical Artist</h3>
+                        <h4>ZeniMax Online Studios (Jul 2020 - Feb 2021)</h4>
+                        <p>
+                            Collaborated with art and engineering teams to improve production pipelines. Mentored technical 
+                            artists and architected asset management systems for unannounced project prototyping phase, 
+                            including world-building workflows in Houdini.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Principal Technical Artist</h3>
+                        <h4>ZeniMax Online Studios (Jan 2020 - Jul 2020)</h4>
+                        <p>
+                            Maintained comprehensive understanding of art production pipelines for Elder Scrolls Online: Greymoor. 
+                            Focused on improving ESO release management systems to support rapid iteration cycles.
+                        </p>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <h3>Content Management Engineer</h3>
+                        <h4>ZeniMax Online Studios (Feb 2017 - Jan 2020)</h4>
+                        <p>
+                            Designed and implemented asset management system with graph database (ArangoDB) and Angular frontend. 
+                            Developed tools for 3dsMax, Maya, and custom Python/C# solutions to streamline production processes.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Presentations Section -->
+    <section id="presentations" class="section">
+        <div class="container">
+            <h2>Industry Presentations</h2>
+            <div class="presentation-grid">
+                <div class="presentation-card">
+                    <div class="presentation-header">
+                        <h3>"Game Tools as a Service"</h3>
+                        <h4>Live Service Gaming North America Summit 2025</h4>
+                    </div>
+                    <div class="presentation-content">
+                        <p><strong>Supporting the Continuous Development of Live Service Products</strong></p>
+                        <div class="presentation-topics">
+                            <span class="topic-tag">Live Service Pipelines</span>
+                            <span class="topic-tag">Asset Management</span>
+                            <span class="topic-tag">Remote Collaboration</span>
+                            <span class="topic-tag">Stakeholder Alignment</span>
+                        </div>
+                        <div class="presentation-details">
+                            <p>Deep dive into building scalable content pipelines, tooling strategies, and managing distributed development teams across global time zones for live service MMO development.</p>
+                            <br>
+                            <p><strong>Key Topics Covered:</strong></p>
+                            <ul>
+                                <li>How content release cycles measure overall project health</li>
+                                <li>Asset lifecycle management for live service games</li>
+                                <li>Cross-functional team collaboration strategies</li>
+                                <li>Adapting development processes for remote work environments</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="presentation-card">
+                    <div class="presentation-header">
+                        <h3>Core Development Philosophy</h3>
+                        <h4>Technical Leadership & Innovation</h4>
+                    </div>
+                    <div class="presentation-content">
+                        <p><strong>Empowering Development Teams</strong></p>
+                        <div class="philosophy-quotes">
+                            <blockquote>"How smoothly a single developer can push content through your pipelines has a direct correlation with how much content you will be able to release"</blockquote>
+                            <blockquote>"Developing live service games is a marathon - maintaining human connections within and across studios is essential"</blockquote>
+                        </div>
+                        <div class="presentation-details">
+                            <p><strong>Key Principles:</strong></p>
+                            <ul>
+                                <li>Focus on iteration speed and developer productivity</li>
+                                <li>Balance stability and velocity in live service environments</li>
+                                <li>Future-proof development processes without premature optimization</li>
+                                <li>Content release cycles as a measure of project health</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2>Get In Touch</h2>
+            <div class="contact-form">
+                <form id="contactForm">
+                    <div class="form-group">
+                        <input type="text" placeholder="Your Name" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="email" placeholder="Your Email" required>
+                    </div>
+                    <div class="form-group">
+                        <textarea rows="5" placeholder="Your Message" required></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary" style="width: 100%;">
+                        Send Message
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        // Contact form handling
+        document.getElementById('contactForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Thank you for your message! I\'ll get back to you soon.');
+            this.reset();
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all skill cards and timeline items
+        document.querySelectorAll('.skill-card, .timeline-item').forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(30px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            observer.observe(el);
+        });
+    </script>
+</body>
+</html>

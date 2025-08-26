@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adam Hafez - Portfolio</title>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -16,9 +17,53 @@
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             line-height: 1.6;
             color: #ffffff;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #4F46E5 0%, #7C3AED 100%);
             min-height: 100vh;
             overflow-x: hidden;
+        }
+
+        /* Modern glassy section colors */
+        .section.about {
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            color: #F8FAFC;
+        }
+
+        .section.about h2 {
+            color: #F8FAFC;
+        }
+        
+        .section.presentations h2 {
+            color: #1E293B;
+        }
+
+        .section.skills {
+            background: linear-gradient(135deg, #0F172A 0%, #1E293B 100%);
+            color: #F8FAFC;
+        }
+
+        .section.skills h2,
+        .section.reading h2 {
+            color: #F8FAFC;
+        }
+
+        .section.experience {
+            background: linear-gradient(135deg, #0EA5E9 0%, #3B82F6 100%);
+            color: #ffffff;
+        }
+
+        .section.presentations {
+            background: linear-gradient(135deg, #F8FAFC 0%, #F1F5F9 100%);
+            color: #0F172A;
+        }
+
+        .section.reading {
+            background: linear-gradient(135deg, #1E293B 0%, #334155 100%);
+            color: #F1F5F9;
+        }
+
+        .section.contact {
+            background: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
+            color: #ffffff;
         }
 
         .container {
@@ -32,7 +77,7 @@
             position: fixed;
             top: 0;
             width: 100%;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             backdrop-filter: blur(10px);
             z-index: 1000;
             padding: 1rem 0;
@@ -84,9 +129,30 @@
             overflow: hidden;
         }
 
+        .hero-layout {
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+            z-index: 2;
+        }
+
+        .hero-image {
+            flex-shrink: 0;
+        }
+
+        .hero-profile-pic {
+            width: 200px;
+            height: 200px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+        }
+
         .hero-content {
             z-index: 2;
             max-width: 600px;
+            flex: 1;
         }
 
         .hero h1 {
@@ -161,34 +227,36 @@
         /* Floating Elements */
         .floating-element {
             position: absolute;
-            background: rgba(255, 255, 255, 0.1);
             border-radius: 50%;
             animation: float 6s ease-in-out infinite;
+            pointer-events: none;
+            z-index: -1;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
         }
 
-        .floating-element:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            right: 10%;
-            animation-delay: 0s;
+        /* Floating element size variations */
+        .floating-element.small {
+            width: 25px;
+            height: 25px;
         }
 
-        .floating-element:nth-child(2) {
-            width: 60px;
-            height: 60px;
-            top: 60%;
-            right: 20%;
-            animation-delay: 2s;
+        .floating-element.medium {
+            width: 45px;
+            height: 45px;
         }
 
-        .floating-element:nth-child(3) {
-            width: 40px;
-            height: 40px;
-            bottom: 20%;
-            right: 15%;
-            animation-delay: 4s;
+        .floating-element.large {
+            width: 70px;
+            height: 70px;
         }
+
+        .floating-element.extra-large {
+            width: 90px;
+            height: 90px;
+        }
+
 
         /* Sections */
         .section {
@@ -197,7 +265,7 @@
         }
 
         .section:nth-child(even) {
-            background: rgba(255, 255, 255, 0.05);
+            background: rgba(255, 255, 255, 0.2);
         }
 
         .section h2 {
@@ -209,21 +277,7 @@
 
         /* About Section */
         .about-content {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-image {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
+            max-width: 800px;
             margin: 0 auto;
         }
 
@@ -236,7 +290,7 @@
         .industry-expertise {
             margin-top: 2rem;
             padding: 2rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 15px;
         }
 
@@ -258,7 +312,7 @@
             flex-direction: column;
             align-items: center;
             padding: 1rem;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             border-radius: 10px;
             text-align: center;
             transition: transform 0.3s ease;
@@ -283,7 +337,7 @@
         }
 
         .presentation-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             padding: 2rem;
             border-radius: 15px;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -331,7 +385,7 @@
         }
 
         .philosophy-quotes blockquote {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             padding: 1rem;
             border-left: 4px solid rgba(255, 255, 255, 0.3);
             margin: 1rem 0;
@@ -365,7 +419,7 @@
         }
 
         .skill-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             padding: 2rem;
             border-radius: 15px;
             text-align: center;
@@ -405,7 +459,7 @@
         }
 
         .timeline-content {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             padding: 2rem;
             border-radius: 15px;
             width: 45%;
@@ -444,7 +498,7 @@
             padding: 1rem;
             border: none;
             border-radius: 10px;
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.3);
             color: #ffffff;
             font-size: 1rem;
         }
@@ -456,6 +510,17 @@
 
         /* Responsive Design */
         @media (max-width: 768px) {
+            .hero-layout {
+                flex-direction: column;
+                gap: 2rem;
+                text-align: center;
+            }
+
+            .hero-profile-pic {
+                width: 150px;
+                height: 150px;
+            }
+
             .hero h1 {
                 font-size: 2.5rem;
             }
@@ -464,10 +529,6 @@
                 font-size: 1.2rem;
             }
 
-            .about-content {
-                grid-template-columns: 1fr;
-                text-align: center;
-            }
 
             .timeline::before {
                 left: 20px;
@@ -538,6 +599,246 @@
                 transform: translateY(-5px);
             }
         }
+
+        /* Currently Reading Section */
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-bottom: 3rem;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .article-card {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 20px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+
+        .article-header {
+            margin-bottom: 1rem;
+        }
+
+        .article-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #ffffff;
+            line-height: 1.4;
+        }
+
+        .article-author {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1rem;
+        }
+
+        .article-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .article-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: auto;
+        }
+
+        .article-category {
+            background: rgba(255, 255, 255, 0.2);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            color: #ffffff;
+            font-weight: 500;
+        }
+
+        .article-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .article-status.reading::before {
+            content: '';
+            margin-right: 0;
+        }
+
+        .article-status.completed::before {
+            content: '';
+            margin-right: 0;
+        }
+
+        .loading-message {
+            text-align: center;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 3rem;
+        }
+
+        .error-message {
+            text-align: center;
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.8);
+            padding: 3rem;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 15px;
+        }
+
+        .external-link-icon::after {
+            content: '↗';
+            margin-left: 0.5rem;
+            opacity: 0.7;
+        }
+
+        /* Search and Filter Controls */
+        .reading-controls {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem 3rem 1rem 1rem;
+            border: none;
+            border-radius: 50px;
+            background: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-size: 1rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .search-input::placeholder {
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .clear-search {
+            position: absolute;
+            right: 1rem;
+            background: none;
+            border: none;
+            color: rgba(255, 255, 255, 0.6);
+            cursor: pointer;
+            font-size: 1.2rem;
+            transition: color 0.3s ease;
+            display: none;
+        }
+
+        .clear-search.visible {
+            display: block;
+        }
+
+        .clear-search:hover {
+            color: rgba(255, 255, 255, 0.9);
+        }
+
+        .filter-container {
+            display: flex;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .category-select,
+        .status-select {
+            flex: 1;
+            min-width: 200px;
+            padding: 0.75rem 1rem;
+            border: none;
+            border-radius: 25px;
+            background: rgba(255, 255, 255, 0.3);
+            color: #ffffff;
+            font-size: 0.9rem;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            cursor: pointer;
+        }
+
+        .category-select:focus,
+        .status-select:focus {
+            outline: none;
+            background: rgba(255, 255, 255, 0.35);
+            border-color: rgba(255, 255, 255, 0.4);
+        }
+
+        .category-select option,
+        .status-select option {
+            background: #333;
+            color: #fff;
+        }
+
+        .results-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 0.9rem;
+        }
+
+        @media (max-width: 768px) {
+            .reading-controls {
+                margin-bottom: 1.5rem;
+            }
+
+            .filter-container {
+                flex-direction: column;
+            }
+
+            .category-select,
+            .status-select {
+                min-width: unset;
+            }
+
+            .results-info {
+                flex-direction: column;
+                gap: 1rem;
+                align-items: flex-start;
+            }
+        }
     </style>
 </head>
 <body>
@@ -551,6 +852,7 @@
                 <li><a href="#skills">Skills</a></li>
                 <li><a href="#experience">Experience</a></li>
                 <li><a href="#presentations">Presentations</a></li>
+                <li><a href="#reading">Reading</a></li>
                 <li><a href="#contact">Contact</a></li>
             </ul>
         </div>
@@ -559,25 +861,34 @@
     <!-- Hero Section -->
     <section id="home" class="hero">
         <div class="container">
-            <div class="hero-content">
-                <h1>Adam Hafez</h1>
-                <p class="subtitle">Project Technical Director - Tools & Pipelines</p>
-                <p class="description">
-                    Technical Director with 8+ years experience in AAA gaming, leading tool and pipeline initiatives 
-                    for live service MMO development. Expert in building scalable content pipelines, asset management 
-                    systems, and fostering cross-functional collaboration in remote development environments.
-                </p>
-                <div class="cta-buttons">
-                    <a href="#contact" class="btn btn-primary">Get In Touch</a>
-                    <a href="#about" class="btn btn-secondary">Learn More</a>
+            <div class="hero-layout">
+                <div class="hero-image">
+                    <img src="profile.jpeg" alt="Adam Hafez" class="hero-profile-pic">
+                </div>
+                <div class="hero-content">
+                    <h1>Adam Hafez</h1>
+                    <p class="subtitle">Project Technical Director - Tools & Pipelines</p>
+                    <p class="description">
+                        Technical Director with 8+ years experience in AAA gaming, leading tool and pipeline initiatives 
+                        for live service MMO development. Expert in building scalable content pipelines, asset management 
+                        systems, and fostering cross-functional collaboration in remote development environments.
+                    </p>
+                    <div class="cta-buttons">
+                        <a href="#contact" class="btn btn-primary">Get In Touch</a>
+                        <a href="#about" class="btn btn-secondary">Learn More</a>
+                    </div>
                 </div>
             </div>
         </div>
         
         <!-- Floating Elements -->
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
-        <div class="floating-element"></div>
+        <div class="floating-element large" style="top: 15%; right: 8%; animation-delay: 0s;"></div>
+        <div class="floating-element medium" style="top: 45%; right: 15%; animation-delay: 1.5s;"></div>
+        <div class="floating-element small" style="top: 70%; right: 25%; animation-delay: 3s;"></div>
+        <div class="floating-element medium" style="top: 25%; left: 12%; animation-delay: 2s;"></div>
+        <div class="floating-element extra-large" style="bottom: 20%; left: 8%; animation-delay: 4s;"></div>
+        <div class="floating-element small" style="top: 35%; left: 25%; animation-delay: 5s;"></div>
+        <div class="floating-element medium" style="bottom: 40%; right: 5%; animation-delay: 0.5s;"></div>
         
         <!-- Scroll Indicator -->
         <div class="scroll-indicator">
@@ -587,13 +898,10 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
+    <section id="about" class="section about">
         <div class="container">
             <h2>About Me</h2>
             <div class="about-content">
-                <div class="about-image">
-                    <img src="profile.jpeg" alt="Adam Hafez" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                </div>
                 <div class="about-text">
                     <p>
                         I'm a Technical Director with over 8 years of experience in AAA gaming, currently 
@@ -610,32 +918,19 @@
                     </p>
                     <br>
                     <div class="industry-expertise">
-                        <h3>Industry Expertise</h3>
-                        <div class="expertise-grid">
-                            <div class="expertise-item">
-                                <span class="expertise-icon">🎨</span>
-                                <span>Artists</span>
-                            </div>
-                            <div class="expertise-item">
-                                <span class="expertise-icon">🎮</span>
-                                <span>Designers</span>
-                            </div>
-                            <div class="expertise-item">
-                                <span class="expertise-icon">⚙️</span>
-                                <span>Engineers</span>
-                            </div>
-                            <div class="expertise-item">
-                                <span class="expertise-icon">🎬</span>
-                                <span>Animators</span>
-                            </div>
-                            <div class="expertise-item">
-                                <span class="expertise-icon">🔧</span>
-                                <span>Technical Artists</span>
-                            </div>
-                            <div class="expertise-item">
-                                <span class="expertise-icon">📋</span>
-                                <span>Producers</span>
-                            </div>
+                        <h3>Core Development Philosophy</h3>
+                        <div class="philosophy-quotes">
+                            <blockquote>"How smoothly a single developer can push content through your pipelines has a direct correlation with how much content you will be able to release"</blockquote>
+                            <blockquote>"Developing live service games is a marathon - maintaining human connections within and across studios is essential"</blockquote>
+                        </div>
+                        <div class="presentation-details">
+                            <p><strong>Key Principles:</strong></p>
+                            <ul>
+                                <li>Focus on iteration speed and developer productivity</li>
+                                <li>Balance stability and velocity in live service environments</li>
+                                <li>Future-proof development processes without premature optimization</li>
+                                <li>Content release cycles as a measure of project health</li>
+                            </ul>
                         </div>
                         <p style="margin-top: 1rem; font-style: italic; color: rgba(255, 255, 255, 0.8);">
                             "People are not systems and are usually happier if they get to do their actual job"
@@ -644,39 +939,55 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-element medium" style="top: 20%; right: 10%; animation-delay: 0.8s;"></div>
+        <div class="floating-element small" style="top: 60%; right: 20%; animation-delay: 2.2s;"></div>
+        <div class="floating-element large" style="bottom: 25%; right: 5%; animation-delay: 3.8s;"></div>
+        <div class="floating-element small" style="top: 35%; left: 8%; animation-delay: 1.5s;"></div>
+        <div class="floating-element medium" style="bottom: 45%; left: 15%; animation-delay: 4.2s;"></div>
+        <div class="floating-element extra-large" style="top: 55%; left: 25%; animation-delay: 5.5s;"></div>
     </section>
 
     <!-- Skills Section -->
-    <section id="skills" class="section">
+    <section id="skills" class="section skills">
         <div class="container">
             <h2>Skills & Expertise</h2>
             <div class="skills-grid">
                 <div class="skill-card">
-                    <div class="skill-icon">🛠️</div>
+                    <div class="skill-icon"><i class="material-icons">build</i></div>
                     <h3>Game Tools as a Service</h3>
                     <p>Asset management systems, content pipelines, developer productivity tools, iteration speed optimization</p>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">👥</div>
+                    <div class="skill-icon"><i class="material-icons">groups</i></div>
                     <h3>Remote Team Leadership</h3>
                     <p>Managing 20+ distributed engineers, cross-timezone collaboration, autonomous team enablement</p>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">🎮</div>
+                    <div class="skill-icon"><i class="material-icons">gamepad</i></div>
                     <h3>Live Service Development</h3>
                     <p>MMO pipelines, continuous content delivery, release management, micro-release cycle optimization</p>
                 </div>
                 <div class="skill-card">
-                    <div class="skill-icon">🔄</div>
+                    <div class="skill-icon"><i class="material-icons">hub</i></div>
                     <h3>Technical Vision & Strategy</h3>
                     <p>Technical roadmapping, stakeholder collaboration, future-proofing development processes</p>
                 </div>
             </div>
         </div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-element large" style="top: 15%; left: 5%; animation-delay: 1.2s;"></div>
+        <div class="floating-element small" style="top: 40%; left: 18%; animation-delay: 2.8s;"></div>
+        <div class="floating-element medium" style="top: 65%; right: 12%; animation-delay: 4.2s;"></div>
+        <div class="floating-element small" style="bottom: 30%; right: 25%; animation-delay: 0.5s;"></div>
+        <div class="floating-element extra-large" style="top: 25%; right: 8%; animation-delay: 3.5s;"></div>
+        <div class="floating-element medium" style="bottom: 15%; left: 12%; animation-delay: 5.8s;"></div>
     </section>
 
     <!-- Experience Section -->
-    <section id="experience" class="section">
+    <section id="experience" class="section experience">
         <div class="container">
             <h2>Professional Experience</h2>
             <div class="timeline">
@@ -724,10 +1035,19 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-element extra-large" style="top: 20%; right: 6%; animation-delay: 1s;"></div>
+        <div class="floating-element medium" style="top: 50%; right: 18%; animation-delay: 2.5s;"></div>
+        <div class="floating-element small" style="bottom: 35%; right: 12%; animation-delay: 4s;"></div>
+        <div class="floating-element large" style="top: 35%; left: 8%; animation-delay: 0.3s;"></div>
+        <div class="floating-element small" style="bottom: 20%; left: 22%; animation-delay: 3.2s;"></div>
+        <div class="floating-element medium" style="top: 65%; left: 15%; animation-delay: 5.5s;"></div>
+        <div class="floating-element small" style="bottom: 50%; right: 30%; animation-delay: 1.8s;"></div>
     </section>
 
     <!-- Presentations Section -->
-    <section id="presentations" class="section">
+    <section id="presentations" class="section presentations">
         <div class="container">
             <h2>Industry Presentations</h2>
             <div class="presentation-grid">
@@ -761,35 +1081,61 @@
                         </div>
                     </div>
                 </div>
-                
-                <div class="presentation-card">
-                    <div class="presentation-header">
-                        <h3>Core Development Philosophy</h3>
-                        <h4>Technical Leadership & Innovation</h4>
-                    </div>
-                    <div class="presentation-content">
-                        <p><strong>Empowering Development Teams</strong></p>
-                        <div class="philosophy-quotes">
-                            <blockquote>"How smoothly a single developer can push content through your pipelines has a direct correlation with how much content you will be able to release"</blockquote>
-                            <blockquote>"Developing live service games is a marathon - maintaining human connections within and across studios is essential"</blockquote>
-                        </div>
-                        <div class="presentation-details">
-                            <p><strong>Key Principles:</strong></p>
-                            <ul>
-                                <li>Focus on iteration speed and developer productivity</li>
-                                <li>Balance stability and velocity in live service environments</li>
-                                <li>Future-proof development processes without premature optimization</li>
-                                <li>Content release cycles as a measure of project health</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
             </div>
         </div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-element large" style="top: 25%; left: 8%; animation-delay: 1.3s;"></div>
+        <div class="floating-element medium" style="top: 55%; left: 20%; animation-delay: 2.8s;"></div>
+        <div class="floating-element small" style="bottom: 30%; left: 5%; animation-delay: 4.5s;"></div>
+        <div class="floating-element extra-large" style="top: 40%; right: 10%; animation-delay: 0.8s;"></div>
+        <div class="floating-element small" style="bottom: 45%; right: 22%; animation-delay: 3.8s;"></div>
+    </section>
+
+    <!-- Currently Reading Section -->
+    <section id="reading" class="section reading">
+        <div class="container">
+            <h2>Currently Reading</h2>
+            <p class="section-subtitle">Articles and resources that are shaping my thinking</p>
+            
+            <!-- Search and Filter Controls -->
+            <div class="reading-controls">
+                <div class="search-container">
+                    <input type="text" id="article-search" placeholder="Search articles..." class="search-input">
+                    <button id="clear-search" class="clear-search">✕</button>
+                </div>
+                <div class="filter-container">
+                    <select id="category-filter" class="category-select">
+                        <option value="">All Categories</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="results-info">
+                <span id="results-count">Loading articles...</span>
+            </div>
+            
+            <div id="articles-container" class="articles-grid">
+                <div class="loading-message">Loading articles...</div>
+            </div>
+            
+            <div class="show-more-container" style="text-align: center; margin-top: 2rem;">
+                <button id="show-more" class="btn btn-secondary" style="display: none;">Show More</button>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="floating-element medium" style="top: 18%; right: 8%; animation-delay: 1.5s;"></div>
+        <div class="floating-element large" style="top: 45%; right: 20%; animation-delay: 3.2s;"></div>
+        <div class="floating-element small" style="bottom: 35%; right: 12%; animation-delay: 5s;"></div>
+        <div class="floating-element extra-large" style="top: 30%; left: 10%; animation-delay: 2.2s;"></div>
+        <div class="floating-element medium" style="bottom: 20%; left: 25%; animation-delay: 4.5s;"></div>
+        <div class="floating-element small" style="top: 65%; left: 5%; animation-delay: 6.2s;"></div>
+        <div class="floating-element medium" style="bottom: 55%; right: 5%; animation-delay: 0.8s;"></div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contact" class="section">
+    <section id="contact" class="section contact">
         <div class="container">
             <h2>Get In Touch</h2>
             <div class="contact-form">
@@ -838,6 +1184,646 @@
 
         // Initialize EmailJS
         emailjs.init('c9l1A9hLjzNfiCSSo'); // Replace with your actual public key
+        
+        // Articles data - Complete dataset from processed CSV
+        const articlesData = {
+            articles: [
+    {
+        "title": "Semantic Versioning 2.0.0",
+        "author": "Semantic Versioning",
+        "url": "https://semver.org/",
+        "description": "Programming article about semantic versioning 2.0.0",
+        "category": "Programming",
+        "dateAdded": "2020-02-20",
+        "status": "completed"
+    },
+    {
+        "title": "Amazon Recommendations Research Paper",
+        "author": "UMD",
+        "url": "http://cs.umd.edu/~samir/498/Amazon-Recommendations.pdf",
+        "description": "Machine learning resource on recommendation systems",
+        "category": "Machine Learning",
+        "dateAdded": "2020-02-20",
+        "status": "reading"
+    },
+    {
+        "title": "Ladder of Abstraction",
+        "author": "Worrydream",
+        "url": "http://worrydream.com/LadderOfAbstraction/",
+        "description": "Article about ladder of abstraction",
+        "category": "General",
+        "dateAdded": "2021-09-15",
+        "status": "reading"
+    },
+    {
+        "title": "Don't Call Yourself A Programmer, And Other Career Advice",
+        "author": "Kalzumeus Software",
+        "url": "https://www.kalzumeus.com/2011/10/28/dont-call-yourself-a-programmer/",
+        "description": "Career and personal development content",
+        "category": "Personal Development",
+        "dateAdded": "2022-12-23",
+        "status": "to-read"
+    },
+    {
+        "title": "Living Worlds in HTML5",
+        "author": "Effectgames",
+        "url": "http://www.effectgames.com/demos/worlds/",
+        "description": "Web development tutorial or guide",
+        "category": "Web Development",
+        "dateAdded": "2022-05-16",
+        "status": "completed"
+    },
+    {
+        "title": "The Nature of Code",
+        "author": "Nature of Code",
+        "url": "https://natureofcode.com/book/introduction/",
+        "description": "Programming article about nature of code",
+        "category": "Programming",
+        "dateAdded": "2020-02-20",
+        "status": "reading"
+    },
+    {
+        "title": "Far Cry: How the Fire Burns and Spreads",
+        "author": "Jflevesque",
+        "url": "https://jflevesque.com/2012/12/06/far-cry-how-the-fire-burns-and-spreads/",
+        "description": "Game development tutorial on fire simulation",
+        "category": "Game Development",
+        "dateAdded": "2020-12-15",
+        "status": "reading"
+    },
+    {
+        "title": "The Fourier Transform, explained in one sentence",
+        "author": "Revolution Analytics",
+        "url": "https://blog.revolutionanalytics.com/2014/01/the-fourier-transform-explained-in-one-sentence.html",
+        "description": "Computer science fundamentals and algorithms",
+        "category": "Computer Science",
+        "dateAdded": "2023-01-15",
+        "status": "to-read"
+    },
+    {
+        "title": "Every Noise at Once",
+        "author": "Everynoise",
+        "url": "https://everynoise.com/",
+        "description": "Article about music visualization",
+        "category": "General",
+        "dateAdded": "2021-04-02",
+        "status": "completed"
+    },
+    {
+        "title": "StackStorm/st2",
+        "author": "StackStorm",
+        "url": "https://github.com/StackStorm/st2",
+        "description": "Development tool or productivity resource",
+        "category": "Tools",
+        "dateAdded": "2022-11-25",
+        "status": "reading"
+    },
+    {
+        "title": "Mathematical and Puzzle Fonts/Typefaces",
+        "author": "Erikdemaine",
+        "url": "https://erikdemaine.org/fonts/",
+        "description": "Design and user experience resource",
+        "category": "Design",
+        "dateAdded": "2024-02-18",
+        "status": "reading"
+    },
+    {
+        "title": "ssloy/tinyrenderer",
+        "author": "ssloy",
+        "url": "https://github.com/ssloy/tinyrenderer/",
+        "description": "Computer graphics article about rendering",
+        "category": "Graphics",
+        "dateAdded": "2022-03-17",
+        "status": "to-read"
+    },
+    {
+        "title": "fulldecent/system-bus-radio",
+        "author": "fulldecent",
+        "url": "https://github.com/fulldecent/system-bus-radio",
+        "description": "Programming article about radio transmission",
+        "category": "Programming",
+        "dateAdded": "2020-12-17",
+        "status": "completed"
+    },
+    {
+        "title": "Personal CRM done right - Monica",
+        "author": "Monicahq",
+        "url": "https://www.monicahq.com/",
+        "description": "Career and personal development content",
+        "category": "Personal Development",
+        "dateAdded": "2020-02-20",
+        "status": "reading"
+    },
+    {
+        "title": "Improving Team Productivity by Reducing Context Switching",
+        "author": "LinkedIn",
+        "url": "https://www.linkedin.com/pulse/improving-team-productivity-reducing-context-karen-casella/",
+        "description": "Leadership and management insights on productivity",
+        "category": "Leadership",
+        "dateAdded": "2023-11-30",
+        "status": "reading"
+    },
+    {
+        "title": "Nomad Game Engine: Part 2 — ECS",
+        "author": "Medium",
+        "url": "https://medium.com/@savas/nomad-game-engine-part-2-ecs-9132829188e5",
+        "description": "Game development tutorial on entity component systems",
+        "category": "Game Development",
+        "dateAdded": "2018-04-18",
+        "status": "to-read"
+    },
+    {
+        "title": "2D Liquid Simulator With Cellular Automaton in Unity",
+        "author": "Jgallant",
+        "url": "http://www.jgallant.com/2d-liquid-simulator-with-cellular-automaton-in-unity/",
+        "description": "Game development tutorial on fluid simulation",
+        "category": "Game Development",
+        "dateAdded": "2023-02-26",
+        "status": "completed"
+    },
+    {
+        "title": "VisUAL - A highly visual ARM emulator",
+        "author": "Salmanarif",
+        "url": "https://salmanarif.bitbucket.io/visual/index.html",
+        "description": "Programming article about ARM emulation",
+        "category": "Programming",
+        "dateAdded": "2020-12-20",
+        "status": "reading"
+    },
+    {
+        "title": "Aria Vent - Custom Vent Solutions",
+        "author": "Ariavent",
+        "url": "https://ariavent.com/",
+        "description": "Home improvement and design resource",
+        "category": "Home",
+        "dateAdded": "2018-04-13",
+        "status": "reading"
+    },
+    {
+        "title": "Snippets in Visual Studio Code",
+        "author": "VSCode",
+        "url": "https://code.visualstudio.com/docs/editor/userdefinedsnippets",
+        "description": "Development tool or productivity resource",
+        "category": "Tools",
+        "dateAdded": "2021-03-14",
+        "status": "to-read"
+    },
+    {
+        "title": "Machine Learning Flashcards",
+        "author": "Machinelearningflashcards",
+        "url": "https://machinelearningflashcards.com/",
+        "description": "Machine learning resource on fundamentals",
+        "category": "Machine Learning",
+        "dateAdded": "2020-03-22",
+        "status": "completed"
+    },
+    {
+        "title": "Lectures in Advanced Data Structures (6.851)",
+        "author": "MIT",
+        "url": "https://courses.csail.mit.edu/6.851/fall17/lectures/",
+        "description": "Computer science fundamentals and algorithms",
+        "category": "Computer Science",
+        "dateAdded": "2020-03-22",
+        "status": "reading"
+    },
+    {
+        "title": "Floating Point Visually Explained",
+        "author": "Fabiensanglard",
+        "url": "http://fabiensanglard.net/floating_point_visually_explained/index.html",
+        "description": "Programming article about floating point",
+        "category": "Programming",
+        "dateAdded": "2020-05-06",
+        "status": "reading"
+    },
+    {
+        "title": "s-macke/VoxelSpace",
+        "author": "s-macke",
+        "url": "https://github.com/s-macke/VoxelSpace",
+        "description": "Game development tutorial on voxel rendering",
+        "category": "Game Development",
+        "dateAdded": "2020-02-20",
+        "status": "to-read"
+    },
+    {
+        "title": "Streamz Documentation",
+        "author": "Streamz",
+        "url": "https://streamz.readthedocs.io/en/latest/index.html#",
+        "description": "Programming article about data streaming",
+        "category": "Programming",
+        "dateAdded": "2020-03-29",
+        "status": "completed"
+    },
+    {
+        "title": "laurent22/joplin",
+        "author": "laurent22",
+        "url": "https://github.com/laurent22/joplin",
+        "description": "Development tool or productivity resource",
+        "category": "Tools",
+        "dateAdded": "2020-02-27",
+        "status": "reading"
+    },
+    {
+        "title": "WTF Python Quirks and Gotchas",
+        "author": "Satwikkansal",
+        "url": "https://github.com/satwikkansal/wtfpython/blob/master/README.md#-first-things-first-",
+        "description": "Programming article about python quirks",
+        "category": "Programming",
+        "dateAdded": "2020-02-20",
+        "status": "reading"
+    },
+    {
+        "title": "thebjorn/pydeps",
+        "author": "thebjorn",
+        "url": "https://github.com/thebjorn/pydeps",
+        "description": "Programming article about python dependencies",
+        "category": "Programming",
+        "dateAdded": "2018-04-11",
+        "status": "to-read"
+    },
+    {
+        "title": "Python Performance Tips",
+        "author": "SDSU",
+        "url": "https://gawron.sdsu.edu/compling/course_core/python_intro/intro_lecture_files/fastpython.html",
+        "description": "Programming article about python optimization",
+        "category": "Programming",
+        "dateAdded": "2020-02-20",
+        "status": "completed"
+    },
+    {
+        "title": "gto76/python-cheatsheet",
+        "author": "gto76",
+        "url": "https://github.com/gto76/python-cheatsheet",
+        "description": "Programming article about python reference",
+        "category": "Programming",
+        "dateAdded": "2020-03-15",
+        "status": "reading"
+    },
+    {
+        "title": "LessPass How Does It Work?",
+        "author": "LessPass",
+        "url": "https://blog.lesspass.com/lesspass-how-it-works-dde742dd18a4#.vbgschksh",
+        "description": "Security and cybersecurity resource",
+        "category": "Security",
+        "dateAdded": "2020-03-15",
+        "status": "reading"
+    },
+    {
+        "title": "grocy - ERP beyond your fridge",
+        "author": "Grocy",
+        "url": "https://grocy.info/",
+        "description": "Development tool or productivity resource",
+        "category": "Tools",
+        "dateAdded": "2020-03-22",
+        "status": "to-read"
+    },
+    {
+        "title": "Comprehensive Guide to build Recommendation Engine from scratch",
+        "author": "Analytics Vidhya",
+        "url": "https://www.analyticsvidhya.com/blog/2018/06/comprehensive-guide-recommendation-engine-python/",
+        "description": "Machine learning resource on recommendation systems",
+        "category": "Machine Learning",
+        "dateAdded": "2020-02-20",
+        "status": "completed"
+    },
+    {
+        "title": "Time traveling with graph databases",
+        "author": "ArangoDB",
+        "url": "https://www.arangodb.com/2018/07/time-traveling-with-graph-databases/",
+        "description": "Database and data engineering content",
+        "category": "Data",
+        "dateAdded": "2020-11-28",
+        "status": "reading"
+    },
+    {
+        "title": "Pixel Art Tutorial Collection",
+        "author": "Imgur",
+        "url": "https://imgur.com/gallery/fP8GMBS",
+        "description": "Design and user experience resource",
+        "category": "Design",
+        "dateAdded": "2020-02-20",
+        "status": "reading"
+    },
+    {
+        "title": "Python & OpenGL for Scientific Visualization",
+        "author": "Nicolas Rougier",
+        "url": "https://www.labri.fr/perso/nrougier/python-opengl/#python-opengl-for-scientific-visualization",
+        "description": "Computer graphics article about scientific visualization",
+        "category": "Graphics",
+        "dateAdded": "2020-02-20",
+        "status": "to-read"
+    },
+    {
+        "title": "Braid - Work Better Together",
+        "author": "Braidchat",
+        "url": "https://www.braidchat.com/",
+        "description": "Development tool or productivity resource",
+        "category": "Tools",
+        "dateAdded": "2018-04-12",
+        "status": "completed"
+    },
+    {
+        "title": "National Park Typeface",
+        "author": "Nationalparktypeface",
+        "url": "https://nationalparktypeface.com/",
+        "description": "Design and user experience resource",
+        "category": "Design",
+        "dateAdded": "2020-02-20",
+        "status": "reading"
+    },
+    {
+        "title": "Reverse engineering the rendering of The Witcher 3",
+        "author": "Astralcode",
+        "url": "https://astralcode.blogspot.com/2018/11/reverse-engineering-rendering-of.html",
+        "description": "Computer graphics article about game rendering",
+        "category": "Graphics",
+        "dateAdded": "2020-02-28",
+        "status": "reading"
+    },
+    {
+        "title": "Operational Transformations for Automatic Conflict Resolution",
+        "author": "Medium",
+        "url": "https://medium.com/coinmonks/operational-transformations-as-an-algorithm-for-automatic-conflict-resolution-3bf8920ea447",
+        "description": "Computer science fundamentals and algorithms",
+        "category": "Computer Science",
+        "dateAdded": "2022-08-12",
+        "status": "to-read"
+    },
+    {
+        "title": "Language Server Extension Guide",
+        "author": "VSCode",
+        "url": "https://code.visualstudio.com/api/language-extensions/language-server-extension-guide",
+        "description": "Development tool or productivity resource",
+        "category": "Tools",
+        "dateAdded": "2021-03-14",
+        "status": "completed"
+    },
+    {
+        "title": "Archives - Bartosz Ciechanowski",
+        "author": "Bartosz Ciechanowski",
+        "url": "https://ciechanow.ski/archives/",
+        "description": "Article about interactive explanations",
+        "category": "General",
+        "dateAdded": "2024-02-28",
+        "status": "reading"
+    },
+    {
+        "title": "SanderMertens/flecs",
+        "author": "SanderMertens",
+        "url": "https://github.com/SanderMertens/flecs",
+        "description": "Game development tutorial on entity component systems",
+        "category": "Game Development",
+        "dateAdded": "2021-10-17",
+        "status": "reading"
+    },
+    {
+        "title": "OpenTelemetry",
+        "author": "Opentelemetry",
+        "url": "https://opentelemetry.io/",
+        "description": "Development tool or productivity resource",
+        "category": "Tools",
+        "dateAdded": "2023-08-21",
+        "status": "to-read"
+    },
+    {
+        "title": "woltapp/blurhash",
+        "author": "woltapp",
+        "url": "https://github.com/woltapp/blurhash",
+        "description": "Programming article about image processing",
+        "category": "Programming",
+        "dateAdded": "2020-02-20",
+        "status": "completed"
+    },
+    {
+        "title": "NeuroSkinning: Automatic Skin Binding with Deep Learning",
+        "author": "Research Paper",
+        "url": "http://www.youyizheng.net/docs/neuroskinning-final-opt.pdf",
+        "description": "Machine learning resource on computer graphics",
+        "category": "Machine Learning",
+        "dateAdded": "2020-10-15",
+        "status": "reading"
+    },
+    {
+        "title": "AliceVision Meshroom - 3D Reconstruction Software",
+        "author": "Alicevision",
+        "url": "https://alicevision.org/#meshroom",
+        "description": "Development tool or productivity resource",
+        "category": "Tools",
+        "dateAdded": "2020-05-10",
+        "status": "reading"
+    },
+    {
+        "title": "Nodes – a new way to create with code",
+        "author": "Nodes",
+        "url": "https://nodes.io/",
+        "description": "Programming article about visual coding",
+        "category": "Programming",
+        "dateAdded": "2021-03-07",
+        "status": "to-read"
+    },
+    {
+        "title": "Three Techniques for Inverting Control, in Python",
+        "author": "David Seddon",
+        "url": "https://seddonym.me/2019/08/03/ioc-techniques/",
+        "description": "Programming article about inversion of control",
+        "category": "Programming",
+        "dateAdded": "2020-02-20",
+        "status": "completed"
+    },
+    {
+        "title": "Orange Chicken Recipe",
+        "author": "Gfycat",
+        "url": "https://gfycat.com/happyorneryammonite-orange-chicken-a-s-cookbook-easy-recipe",
+        "description": "Recipe and cooking guide",
+        "category": "Cooking",
+        "dateAdded": "2020-02-20",
+        "status": "reading"
+    },
+    {
+        "title": "How Morning Brew's referral program built 1.5M subscribers",
+        "author": "Medium",
+        "url": "https://medium.com/the-mission/how-morning-brews-referral-program-built-an-audience-of-1-5-million-subscribers-3315482c1aa5",
+        "description": "Article about growth and marketing",
+        "category": "General",
+        "dateAdded": "2024-02-11",
+        "status": "reading"
+    },
+    {
+        "title": "Modern C++ Tutorial",
+        "author": "Changkun",
+        "url": "https://changkun.de/modern-cpp/pdf/modern-cpp-tutorial-en-us.pdf",
+        "description": "Programming article about modern c++",
+        "category": "Programming",
+        "dateAdded": "2021-02-07",
+        "status": "to-read"
+    }
+]
+        };
+        
+        // Search and filter state
+        let currentFilter = {
+            search: '',
+            category: ''
+        };
+        let displayedCount = 12; // Initial number to show
+        const incrementCount = 12; // How many more to show when "Show More" is clicked
+        let filteredArticles = [];
+        
+        // Load and display articles
+        function loadArticles() {
+            try {
+                // Populate category filter options
+                populateCategoryFilter();
+                
+                // Initial display
+                filterAndDisplayArticles();
+                
+                // Set up event listeners
+                setupEventListeners();
+            } catch (error) {
+                console.error('Error loading articles:', error);
+                displayError();
+            }
+        }
+        
+        function populateCategoryFilter() {
+            const categories = [...new Set(articlesData.articles.map(article => article.category))].sort();
+            const categorySelect = document.getElementById('category-filter');
+            
+            categories.forEach(category => {
+                const option = document.createElement('option');
+                option.value = category;
+                option.textContent = category;
+                categorySelect.appendChild(option);
+            });
+        }
+        
+        function setupEventListeners() {
+            const searchInput = document.getElementById('article-search');
+            const clearSearchBtn = document.getElementById('clear-search');
+            const categoryFilter = document.getElementById('category-filter');
+            const showMoreBtn = document.getElementById('show-more');
+            
+            // Search input with debouncing
+            let searchTimeout;
+            searchInput.addEventListener('input', (e) => {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(() => {
+                    currentFilter.search = e.target.value;
+                    displayedCount = incrementCount; // Reset count when searching
+                    filterAndDisplayArticles();
+                    
+                    // Show/hide clear button
+                    if (e.target.value) {
+                        clearSearchBtn.classList.add('visible');
+                    } else {
+                        clearSearchBtn.classList.remove('visible');
+                    }
+                }, 300);
+            });
+            
+            // Clear search
+            clearSearchBtn.addEventListener('click', () => {
+                searchInput.value = '';
+                currentFilter.search = '';
+                clearSearchBtn.classList.remove('visible');
+                displayedCount = incrementCount;
+                filterAndDisplayArticles();
+            });
+            
+            // Category filter
+            categoryFilter.addEventListener('change', (e) => {
+                currentFilter.category = e.target.value;
+                displayedCount = incrementCount;
+                filterAndDisplayArticles();
+            });
+            
+            
+            // Show more button
+            showMoreBtn.addEventListener('click', () => {
+                displayedCount += incrementCount;
+                filterAndDisplayArticles();
+            });
+        }
+        
+        function filterAndDisplayArticles() {
+            // Filter articles based on current filters
+            filteredArticles = articlesData.articles.filter(article => {
+                const matchesSearch = !currentFilter.search || 
+                    article.title.toLowerCase().includes(currentFilter.search.toLowerCase()) ||
+                    article.author.toLowerCase().includes(currentFilter.search.toLowerCase()) ||
+                    article.description.toLowerCase().includes(currentFilter.search.toLowerCase()) ||
+                    article.category.toLowerCase().includes(currentFilter.search.toLowerCase());
+                
+                const matchesCategory = !currentFilter.category || article.category === currentFilter.category;
+                
+                return matchesSearch && matchesCategory;
+            });
+            
+            // Update results count
+            updateResultsInfo();
+            
+            // Display articles
+            displayArticles(filteredArticles.slice(0, displayedCount));
+        }
+        
+        function updateResultsInfo() {
+            const resultsCount = document.getElementById('results-count');
+            const showMoreBtn = document.getElementById('show-more');
+            
+            const totalFiltered = filteredArticles.length;
+            const showing = Math.min(displayedCount, totalFiltered);
+            
+            if (totalFiltered === 0) {
+                resultsCount.textContent = 'No articles found matching your criteria.';
+                showMoreBtn.style.display = 'none';
+            } else if (totalFiltered === articlesData.articles.length) {
+                resultsCount.textContent = `Showing ${showing} of ${totalFiltered} articles`;
+            } else {
+                resultsCount.textContent = `Showing ${showing} of ${totalFiltered} articles (filtered from ${articlesData.articles.length} total)`;
+            }
+            
+            // Show/hide "Show More" button
+            if (showing < totalFiltered) {
+                showMoreBtn.style.display = 'inline-block';
+                showMoreBtn.textContent = `Show ${Math.min(incrementCount, totalFiltered - showing)} More`;
+            } else {
+                showMoreBtn.style.display = 'none';
+            }
+        }
+        
+        function displayArticles(articles) {
+            const container = document.getElementById('articles-container');
+            
+            if (articles.length === 0) {
+                container.innerHTML = '<div class="error-message">No articles found matching your criteria.</div>';
+                return;
+            }
+            
+            container.innerHTML = articles.map(article => `
+                <div class="article-card" onclick="openArticle('${article.url.replace(/'/g, "\\'")}')">
+                    <div class="article-header">
+                        <h3 class="article-title external-link-icon">${article.title}</h3>
+                        <p class="article-author">by ${article.author}</p>
+                    </div>
+                    <p class="article-description">${article.description}</p>
+                    <div class="article-meta">
+                        <span class="article-category">${article.category}</span>
+                    </div>
+                </div>
+            `).join('');
+        }
+        
+        function displayError() {
+            const container = document.getElementById('articles-container');
+            container.innerHTML = '<div class="error-message">Unable to load articles. Please try again later.</div>';
+        }
+        
+        function openArticle(url) {
+            window.open(url, '_blank', 'noopener,noreferrer');
+        }
+        
+        // Load articles when page loads
+        document.addEventListener('DOMContentLoaded', loadArticles);
         
         // Contact form handling
         document.getElementById('contactForm').addEventListener('submit', function(e) {

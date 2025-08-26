@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Adam Hafez - Portfolio</title>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
     <style>
         * {
             margin: 0;
@@ -835,11 +836,40 @@
             }
         });
 
+        // Initialize EmailJS
+        emailjs.init('c9l1A9hLjzNfiCSSo'); // Replace with your actual public key
+        
         // Contact form handling
         document.getElementById('contactForm').addEventListener('submit', function(e) {
             e.preventDefault();
-            alert('Thank you for your message! I\'ll get back to you soon.');
-            this.reset();
+            
+            const submitButton = this.querySelector('button[type="submit"]');
+            const originalText = submitButton.textContent;
+            
+            submitButton.textContent = 'Sending...';
+            submitButton.disabled = true;
+            
+            // Get form data
+            const formData = new FormData(this);
+            const templateParams = {
+                from_name: this.querySelector('input[type="text"]').value,
+                from_email: this.querySelector('input[type="email"]').value,
+                message: this.querySelector('textarea').value
+            };
+            
+            emailjs.send('service_9tese46', 'template_x750v3q', templateParams)
+                .then(function(response) {
+                    alert('Thank you for your message! I\'ll get back to you soon.');
+                    document.getElementById('contactForm').reset();
+                })
+                .catch(function(error) {
+                    alert('Sorry, there was an error sending your message. Please try again.');
+                    console.error('EmailJS error:', error);
+                })
+                .finally(function() {
+                    submitButton.textContent = originalText;
+                    submitButton.disabled = false;
+                });
         });
 
         // Intersection Observer for animations

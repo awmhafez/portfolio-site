@@ -35,15 +35,16 @@
     <!-- Canonical URL -->
     <link rel="canonical" href="https://adamhafez.co/">
     
-    <!-- Security Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://api.emailjs.com; frame-ancestors 'none'; base-uri 'self'; form-action 'self';">
-    <meta http-equiv="X-Frame-Options" content="DENY">
+    <!-- Security Headers (delivered via _headers file) -->
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta http-equiv="Referrer-Policy" content="strict-origin-when-cross-origin">
-    <meta http-equiv="Permissions-Policy" content="geolocation=(), microphone=(), camera=(), payment=(), usb=(), magnetometer=(), gyroscope=(), speaker=()">
     
     <!-- Additional SEO -->
     <meta name="theme-color" content="#4F46E5">
+    
+    <!-- Preload critical resources -->
+    <link rel="preload" as="image" href="profile.jpeg" type="image/jpeg">
+    <link rel="preload" as="image" href="profile.webp" type="image/webp">
     
     <!-- Favicon -->
     <link rel="icon" type="image/svg+xml" href="favicon.svg">
@@ -51,9 +52,11 @@
     <link rel="icon" type="image/png" href="favicon-16x16.png" sizes="16x16">
     <link rel="apple-touch-icon" href="apple-touch-icon.png" sizes="180x180">
     <link rel="manifest" href="site.webmanifest">
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
-    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet"></noscript>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="preload" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet"></noscript>
     
     <!-- JSON-LD Structured Data -->
     <script type="application/ld+json">
@@ -1360,7 +1363,10 @@
     <nav id="navbar" role="navigation" aria-label="Main navigation">
         <div class="nav-container">
             <div class="logo">
-                <img src="profile.jpeg" alt="Adam Hafez Profile Picture" class="nav-profile-pic" id="nav-profile-pic">
+                <picture>
+                    <source srcset="profile.webp" type="image/webp">
+                    <img src="profile.jpeg" alt="Adam Hafez Profile Picture" class="nav-profile-pic" id="nav-profile-pic" loading="eager" width="40" height="40">
+                </picture>
                 <span>Adam Hafez</span>
             </div>
             <ul class="nav-links" role="menubar">
@@ -1386,7 +1392,10 @@
             <div class="container">
                 <div class="hero-layout">
                     <div class="hero-image">
-                        <img src="profile.jpeg" alt="Professional headshot of Adam Hafez, Technical Director specializing in game development tools and pipelines" class="hero-profile-pic" loading="eager">
+                        <picture>
+                            <source srcset="profile.webp" type="image/webp">
+                            <img src="profile.jpeg" alt="Professional headshot of Adam Hafez, Technical Director specializing in game development tools and pipelines" class="hero-profile-pic" loading="eager" width="300" height="300">
+                        </picture>
                     </div>
                     <div class="hero-content">
                         <h1 id="hero-heading">Adam Hafez</h1>
@@ -1738,8 +1747,12 @@
             }
         });
 
-        // Initialize EmailJS
-        emailjs.init('c9l1A9hLjzNfiCSSo'); // Replace with your actual public key
+        // Initialize EmailJS when script loads
+        document.addEventListener('DOMContentLoaded', function() {
+            if (typeof emailjs !== 'undefined') {
+                emailjs.init('c9l1A9hLjzNfiCSSo'); // Replace with your actual public key
+            }
+        });
         
         // Articles data - Complete dataset from processed CSV
         const articlesData = {
